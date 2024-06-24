@@ -8,7 +8,7 @@ pipeline {
         DOCKER_PASS = credentials("DOCKER_HUB_PASS") // DockerHub password from Jenkins credentials
 
         // Kubernetes credentials
-        KUBECONFIG = credentials("kubeconfig") // kubeconfig file from Jenkins credentials
+        KUBECONFIG = credentials("config") // kubeconfig file from Jenkins credentials
     }
     agent any
     stages {
@@ -18,7 +18,7 @@ pipeline {
                     steps {
                         script {
                             sh '''
-                                docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG ./path/to/cast-service
+                                docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG ./cast-service
                             '''
                         }
                     }
@@ -27,7 +27,7 @@ pipeline {
                     steps {
                         script {
                             sh '''
-                                docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG ./path/to/movie-service
+                                docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG ./movie-service
                             '''
                         }
                     }
@@ -67,7 +67,7 @@ pipeline {
                         cp $KUBECONFIG $HOME/.kube/config
 
                         # Deploy Helm chart
-                        helm upgrade --install jenkins-datascientest ./path/to/your/helm/chart --namespace dev --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                        helm upgrade --install jenkins-datascientest ./docker-compose --namespace dev --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
                     '''
                 }
             }
