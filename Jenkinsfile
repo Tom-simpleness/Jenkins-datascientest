@@ -62,10 +62,10 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        sudo rm -Rf .kube
-                        sudo mkdir .kube
+                        rm -Rf .kube
+                        mkdir .kube
                         ls
-                        sudo cat $KUBECONFIG > .kube/config
+                        cat $KUBECONFIG > .kube/config
 
                         # Deploy Helm chart
                         helm upgrade --install jenkins-datascientest ./docker-compose --namespace dev --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
