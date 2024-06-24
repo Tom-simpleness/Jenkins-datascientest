@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c
+    kompose.version: 1.21.0 (992df58d8)
+  name: {{ include "docker-compose.fullname" . }}-cast-db
+  labels:
+    app: {{ include "docker-compose.name" . }}-cast-db
+spec:
+  replicas: {{ .Values.castDb.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "docker-compose.name" . }}-cast-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c
+        kompose.version: 1.21.0 (992df58d8)
+      labels:
+        app: {{ include "docker-compose.name" . }}-cast-db
+    spec:
+      containers:
+      - name: cast-db
+        image: {{ .Values.castDb.image.repository }}:{{ .Values.castDb.image.tag }}
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRES_DB
+          value: {{ .Values.castDb.env.POSTGRES_DB }}
+        - name: POSTGRES_PASSWORD
+          value: {{ .Values.castDb.env.POSTGRES_PASSWORD }}
+        - name: POSTGRES_USER
+          value: {{ .Values.castDb.env.POSTGRES_USER }}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data/
+          name: postgres-data-cast
+      restartPolicy: Always
+      volumes:
+      - name: postgres-data-cast
+        persistentVolumeClaim:
+          claimName: {{ .Values.castDb.persistentVolumeClaim }}
