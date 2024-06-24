@@ -67,7 +67,8 @@ pipeline {
                         cp $KUBECONFIG $HOME/.kube/config
                         
                         # Set appropriate permissions for kubeconfig
-                        chmod 600 $HOME/.kube/config
+                        chmod 777 $HOME/.kube
+                        chmod 666 $HOME/.kube/config
 
                         # Deploy Helm chart
                         helm upgrade --install jenkins-datascientest ./docker-compose --namespace dev --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
