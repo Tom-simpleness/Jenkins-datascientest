@@ -12,7 +12,7 @@ pipeline {
     }
     agent any
     stages {
-        stage('Docker Build') {
+        stage('Docker Build Image') {
             parallel {
                 stage('Build Cast Service') {
                     steps {
@@ -34,7 +34,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Push') {
+        stage('Docker Push DockerHub') {
             parallel {
                 stage('Push Cast Service') {
                     steps {
