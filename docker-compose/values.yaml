@@ -13,20 +13,19 @@ castDb:
   service:
     port: 5432
 
-castDb:
+castService:
   replicaCount: 1
   image:
-    repository: postgres
-    tag: 12.1-alpine
+    repository: dockerstudi/dts-exam-cast
+    tag: "latest"
   env:
-    POSTGRES_DB: cast_db_dev
-    POSTGRES_PASSWORD: cast_db_password
-    POSTGRES_USER: cast_db_username
+    DATABASE_URI: "postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev"
   persistentVolumeClaim:
-    name: postgres-data-cast
+    name: cast-service-claim0
     storage: 100Mi
   service:
-    port: 5432
+    port: 8002
+    targetPort: 8000
 
 movieDb:
   replicaCount: 1
@@ -40,8 +39,6 @@ movieDb:
   persistentVolumeClaim:
     name: postgres-data-movie
     storage: 100Mi
-  service:
-    port: 5432
 
 movieService:
   replicaCount: 1
