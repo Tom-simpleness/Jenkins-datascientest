@@ -1,9 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -c
-    kompose.version: 1.21.0 (992df58d8)
   name: {{ include "docker-compose.fullname" . }}-nginx
   labels:
     app: {{ include "docker-compose.name" . }}-nginx
@@ -16,9 +13,6 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -c
-        kompose.version: 1.21.0 (992df58d8)
       labels:
         app: {{ include "docker-compose.name" . }}-nginx
     spec:
@@ -27,9 +21,9 @@ spec:
         image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8080
+        - containerPort: {{ .Values.nginx.service.port }}
         volumeMounts:
-        - mountPath: /etc/nginx/conf.d/
+        - mountPath: /usr/share/nginx/html
           name: nginx-claim0
       restartPolicy: Always
       volumes:

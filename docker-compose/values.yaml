@@ -64,5 +64,7 @@ nginx:
     name: nginx-claim0
     storage: 100Mi
   service:
+    type: NodePort
     port: 8080
     targetPort: 8080
+    nodePort: 30080

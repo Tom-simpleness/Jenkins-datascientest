@@ -5,9 +5,11 @@ metadata:
   labels:
     app: {{ include "docker-compose.name" . }}-nginx
 spec:
+  type: {{ .Values.nginx.service.type }}
   ports:
-  - name: "8080"
-    port: 8080
-    targetPort: 8080
+  - port: {{ .Values.nginx.service.port }}
+    targetPort: {{ .Values.nginx.service.targetPort }}
+    nodePort: {{ .Values.nginx.service.nodePort | default "null" }}
+    protocol: TCP
   selector:
     app: {{ include "docker-compose.name" . }}-nginx
