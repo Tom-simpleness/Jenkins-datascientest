@@ -10,8 +10,9 @@ castDb:
   persistentVolumeClaim:
     name: postgres-data-cast
     storage: 100Mi
-  service:
-    port: 5432
+  persistentVolume:
+    path: /mnt/data/postgres-cast
+    node: "<node-name>"
 
 castService:
   replicaCount: 1
@@ -39,6 +40,9 @@ movieDb:
   persistentVolumeClaim:
     name: postgres-data-movie
     storage: 100Mi
+  persistentVolume:
+    path: /mnt/data/postgres-movie
+    node: "<node-name>"
 
 movieService:
   replicaCount: 1
@@ -68,4 +72,3 @@ nginx:
     port: 8081
     targetPort: 8081
     nodePort: 30081
-
