@@ -7,9 +7,9 @@ metadata:
 spec:
   type: {{ .Values.nginx.service.type }}
   ports:
-  - port: {{ .Values.nginx.service.port }}
-    targetPort: {{ .Values.nginx.service.targetPort }}
-    nodePort: {{ .Values.nginx.service.nodePort | default "null" }}
+  - port: 8081
+    targetPort: 8081
+    nodePort: 30081  # Ensure this NodePort is not used by any other service
     protocol: TCP
   selector:
     app: {{ include "docker-compose.name" . }}-nginx

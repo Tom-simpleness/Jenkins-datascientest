@@ -21,12 +21,13 @@ spec:
         image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: {{ .Values.nginx.service.port }}
+        - containerPort: 8081
         volumeMounts:
-        - mountPath: /usr/share/nginx/html
-          name: nginx-claim0
+        - mountPath: /etc/nginx/conf.d/nginx_config.conf
+          subPath: nginx_config.conf
+          name: nginx-config
       restartPolicy: Always
       volumes:
-      - name: nginx-claim0
-        persistentVolumeClaim:
-          claimName: {{ .Values.nginx.persistentVolumeClaim.name }}
+      - name: nginx-config
+        configMap:
+          name: nginx-config
