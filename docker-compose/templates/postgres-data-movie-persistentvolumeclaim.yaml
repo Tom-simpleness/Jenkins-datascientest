@@ -10,3 +10,4 @@ spec:
   resources:
     requests:
       storage: {{ .Values.movieDb.persistentVolumeClaim.storage }}
+  storageClassName: local-path
