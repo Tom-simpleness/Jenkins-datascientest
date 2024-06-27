@@ -57,8 +57,7 @@ pipeline {
                     }
                 }
             }
-        }
-        stage('Deploy to dev-env') {
+        }stage('Deploy to dev-env') {
             steps {
                 script {
                     sh '''
@@ -79,6 +78,71 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to qa-env') {
+            steps {
+                script {
+                    sh '''
+                        rm -Rf .kube
+                        mkdir .kube
+                        ls
+                        cat $KUBECONFIG > .kube/config
+
+                        # Check if the release exists
+                        if helm status qa-env --namespace qa >/dev/null 2>&1; then
+                            # Release exists, perform an upgrade
+                            helm upgrade --install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                        else
+                            # Release does not exist, perform an installation
+                            helm install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                        fi
+                    '''
+                }
+            }
+        }
+        stage('Deploy to staging-env') {
+            steps {
+                script {
+                    sh '''
+                        rm -Rf .kube
+                        mkdir .kube
+                        ls
+                        cat $KUBECONFIG > .kube/config
+
+                        # Check if the release exists
+                        if helm status staging-env --namespace staging >/dev/null 2>&1; then
+                            # Release exists, perform an upgrade
+                            helm upgrade --install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                        else
+                            # Release does not exist, perform an installation
+                            helm install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                        fi
+                    '''
+                }
+            }
+        }
+        stage('Deploy to production') {
+            steps {
+                script {
+                    input message: 'Do you want to deploy to production?', ok: 'Deploy'
+                    sh '''
+                        rm -Rf .kube
+                        mkdir .kube
+                        ls
+                        cat $KUBECONFIG > .kube/config
+
+                        # Check if the release exists
+                        if helm status production-env --namespace production >/dev/null 2>&1; then
+                            # Release exists, perform an upgrade
+                            helm upgrade --install production-env ./microservices --namespace production --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                        else
+                            # Release does not exist, perform an installation
+                            helm install production-env ./microservices --namespace production --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                        fi
+                    '''
+                }
+            }
+        }
+        
     }
     post {
         success {
