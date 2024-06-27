@@ -87,7 +87,11 @@ pipeline {
                         mkdir .kube
                         ls
                         cat $KUBECONFIG > .kube/config
-
+                        echo "Current directory: $(pwd)"
+                        echo "Contents of current directory:"
+                        ls -la
+                        echo "Contents of values-qa.yaml:"
+                        cat values-qa.yaml
                         # Check if the release exists
                         if helm status qa-env --namespace qa >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
