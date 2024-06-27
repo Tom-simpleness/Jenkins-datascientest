@@ -89,7 +89,7 @@ pipeline {
                         cat $KUBECONFIG > .kube/config
 
                         # Check if the release exists
-                        if helm status qa-env --namespace qa >/qa/null 2>&1; then
+                        if helm status qa-env --namespace qa >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
                             helm upgrade --install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
                         else
@@ -110,7 +110,7 @@ pipeline {
                         cat $KUBECONFIG > .kube/config
 
                         # Check if the release exists
-                        if helm status staging-env --namespace staging >/staging/null 2>&1; then
+                        if helm status staging-env --namespace staging >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
                             helm upgrade --install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
                         else
@@ -132,7 +132,7 @@ pipeline {
                         cat $KUBECONFIG > .kube/config
 
                         # Check if the release exists
-                        if helm status production-env --namespace production >/production/null 2>&1; then
+                        if helm status production-env --namespace production >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
                             helm upgrade --install production-env ./microservices --namespace production --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
                         else
