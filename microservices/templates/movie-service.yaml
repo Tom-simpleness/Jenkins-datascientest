@@ -17,7 +17,7 @@ spec:
       - name: {{ .Values.movieService.name }}
         image: {{ .Values.movieService.image.repository }}:{{ .Values.movieService.image.tag }}
         command: {{ .Values.movieService.command }}
-        args: {{ .Values.movieService.args }}
+        args: ["app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
         ports:
         - containerPort: {{ .Values.movieService.port }}
         env:
