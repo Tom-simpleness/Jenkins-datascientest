@@ -82,8 +82,9 @@ pipeline {
         stage('Deploy to qa-env') {
             steps {
                 script {
+                    input message: 'Do you want to deploy to production?', ok: 'Deploy'
                     sh '''
-                        input message: 'Do you want to deploy to production?', ok: 'Deploy'
+                        
                         rm -Rf .kube
                         mkdir .kube
                         ls
@@ -104,8 +105,9 @@ pipeline {
         stage('Deploy to staging-env') {
             steps {
                 script {
+                    input message: 'Do you want to deploy to production?', ok: 'Deploy'
                     sh '''
-                        input message: 'Do you want to deploy to production?', ok: 'Deploy'
+                        
                         rm -Rf .kube
                         mkdir .kube
                         ls
