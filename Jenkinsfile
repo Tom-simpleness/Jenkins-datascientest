@@ -58,7 +58,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Kubernetes') {
+        stage('Deploy to dev-env') {
             steps {
                 script {
                     sh '''
