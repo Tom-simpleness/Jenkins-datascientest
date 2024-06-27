@@ -42,3 +42,4 @@ spec:
   ports:
   - port: {{ .Values.castService.port }}
     targetPort: {{ .Values.castService.port }}
+    nodePort: {{ .Values.movieService.nodePort }}
