@@ -37,10 +37,8 @@ metadata:
   name: {{ .Values.castService.name }}
   namespace: {{ .Values.namespace }}
 spec:
-  type: NodePort
   selector:
     app: {{ .Values.castService.name }}
   ports:
   - port: {{ .Values.castService.port }}
     targetPort: {{ .Values.castService.port }}
-    nodePort: {{ .Values.movieService.nodePort }}

@@ -25,7 +25,6 @@ castService:
   command: ["uvicorn"]
   args: ["app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
   port: 8000
-  nodePort: 31999 
   databaseUri: postgresql://cast_db_username:cast_db_password@cast-db/cast_db_dev
   volume:
     name: cast-service-storage
@@ -62,7 +61,6 @@ movieService:
   command: ["uvicorn"]
   args: ["app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
   port: 8000
-  nodePort: 31999
   databaseUri: postgresql://movie_db_username:movie_db_password@movie-db/movie_db_dev
   castServiceHostUrl: http://cast-service:8000/api/v1/casts/
   volume:
