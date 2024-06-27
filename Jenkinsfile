@@ -91,10 +91,10 @@ pipeline {
                         # Check if the release exists
                         if helm status qa-env --namespace qa >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa contextPath=/qa
+                            helm upgrade --install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa --set contextPath=/qa
                         else
                             # Release does not exist, perform an installation
-                            helm install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa contextPath=/qa
+                            helm install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa --set contextPath=/qa
                         fi
                     '''
                 }
