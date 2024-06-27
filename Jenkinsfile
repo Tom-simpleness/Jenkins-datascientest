@@ -9,6 +9,7 @@ pipeline {
 
         // Kubernetes credentials
         KUBECONFIG = credentials("config") // kubeconfig file from Jenkins credentials
+        
     }
     agent any
     stages {
