@@ -10,7 +10,7 @@ spec:
   - http:
       paths:
       {{- range .Values.ingress.paths }}
-      - path: /{{ $.Values.namespace }}{{ .path }}
+      - path: {{ .path }}
         pathType: {{ .pathType }}
         backend:
           service:
