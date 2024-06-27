@@ -83,6 +83,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        input message: 'Do you want to deploy to production?', ok: 'Deploy'
                         rm -Rf .kube
                         mkdir .kube
                         ls
@@ -104,6 +105,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        input message: 'Do you want to deploy to production?', ok: 'Deploy'
                         rm -Rf .kube
                         mkdir .kube
                         ls
