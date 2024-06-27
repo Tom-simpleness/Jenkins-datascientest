@@ -91,10 +91,10 @@ pipeline {
                         # Check if the release exists
                         if helm status qa-env --namespace qa >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install qa-env ./microservices --namespace qa --values .microservices/values-qa.yaml --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --force
+                            helm upgrade --install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa
                         else
                             # Release does not exist, perform an installation
-                            helm install qa-env ./microservices --namespace qa --values .microservices/values-qa.yaml --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} 
+                            helm install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa
                         fi
                     '''
                 }
@@ -112,10 +112,10 @@ pipeline {
                         # Check if the release exists
                         if helm status staging-env --namespace staging >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                            helm upgrade --install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=staging
                         else
                             # Release does not exist, perform an installation
-                            helm install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                            helm install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=staging
                         fi
                     '''
                 }
@@ -134,10 +134,10 @@ pipeline {
                         # Check if the release exists
                         if helm status production-env --namespace production >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                            helm upgrade --install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=prod
                         else
                             # Release does not exist, perform an installation
-                            helm install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                            helm install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=prod
                         fi
                     '''
                 }
