@@ -94,7 +94,7 @@ pipeline {
                             helm upgrade --install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa 
                         else
                             # Release does not exist, perform an installation
-                            helm install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa --set 
+                            helm install qa-env ./microservices --namespace qa --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=qa 
                         fi
                     '''
                 }
