@@ -87,11 +87,11 @@ pipeline {
                         mkdir .kube
                         ls
                         cat $KUBECONFIG > .kube/config
-                        cd microservices
+                        
                         # Check if the release exists
                         if helm status qa-env --namespace qa >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install qa-env ./microservices --namespace qa --values values-qa.yaml --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --force
+                            helm upgrade --install qa-env ./microservices --namespace qa --values .microservices/values-qa.yaml --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --force
                         else
                             # Release does not exist, perform an installation
                             helm install qa-env ./microservices --namespace qa --values values-qa.yaml --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} 
