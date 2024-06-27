@@ -1,4 +1,16 @@
-namespace: dev
+environment: dev
+
+dev:
+  namespace: dev
+
+staging:
+  namespace: staging
+
+qa:
+  namespace: qa
+
+prod:
+  namespace: prod
 
 castDb:
   name: cast-db
@@ -21,7 +33,7 @@ castService:
   replicas: 1
   image:
     repository: dockerstudi/dts-exam-cast
-    tag: v.47.3
+    tag: "latest"
   command: ["uvicorn"]
   args: ["app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
   port: 8000
@@ -57,7 +69,7 @@ movieService:
   replicas: 1
   image:
     repository: dockerstudi/dts-exam-movie
-    tag: v.47.3
+    tag: "latest"
   command: ["uvicorn"]
   args: ["app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
   port: 8000
