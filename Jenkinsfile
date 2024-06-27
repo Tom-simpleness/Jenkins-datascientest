@@ -134,10 +134,10 @@ pipeline {
                         # Check if the release exists
                         if helm status production-env --namespace production >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install production-env ./microservices --namespace production --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                            helm upgrade --install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
                         else
                             # Release does not exist, perform an installation
-                            helm install production-env ./microservices --namespace production --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                            helm install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
                         fi
                     '''
                 }
