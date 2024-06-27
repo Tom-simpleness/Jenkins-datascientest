@@ -91,6 +91,8 @@ ingress:
       pathType: Prefix
       serviceName: cast-service
       servicePort: 8000
+env:
+  contextPath: /dev
 
 dbSecrets:
   name: db-secrets
