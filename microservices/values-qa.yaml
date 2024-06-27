@@ -1,5 +1,5 @@
 namespace: qa
-
+ 
 castDb:
   name: cast-db
   replicas: 1
