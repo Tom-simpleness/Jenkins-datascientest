@@ -8,7 +8,7 @@ castDb:
     tag: 12.1-alpine
   port: 5432
   postgresUser: cast_db_username
-  secretName: db-secrets-dev
+  secretName: db-secrets
   secretKey: cast-db-password
   postgresDb: cast_db_dev
   volume:
@@ -44,7 +44,7 @@ movieDb:
     tag: 12.1-alpine
   port: 5432
   postgresUser: movie_db_username
-  secretName: db-secrets-dev
+  secretName: db-secrets
   secretKey: movie-db-password
   postgresDb: movie_db_dev
   volume:
@@ -93,7 +93,7 @@ ingress:
       servicePort: 8000
 
 dbSecrets:
-  name: db-secrets-dev
+  name: db-secrets
   movieDbPasswordKey: movie-db-password
   movieDbPassword: movie_db_password
   castDbPasswordKey: cast-db-password
