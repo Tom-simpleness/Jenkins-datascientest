@@ -57,7 +57,8 @@ pipeline {
                     }
                 }
             }
-        }stage('Deploy to dev-env') {
+        }
+        stage('Deploy to dev-env') {
             steps {
                 script {
                     sh '''
