@@ -1,16 +1,4 @@
-environment: dev
-
-dev:
-  namespace: dev
-
-staging:
-  namespace: staging
-
-qa:
-  namespace: qa
-
-prod:
-  namespace: prod
+namespace: dev
 
 castDb:
   name: cast-db

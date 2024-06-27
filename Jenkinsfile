@@ -70,7 +70,7 @@ pipeline {
                         # Check if the release exists
                         if helm status dev-env --namespace dev >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --force --install dev-env ./microservices --namespace dev --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
+                            helm upgrade --install dev-env ./microservices --namespace dev --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
                         else
                             # Release does not exist, perform an installation
                             helm install dev-env ./microservices --namespace dev --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG}
