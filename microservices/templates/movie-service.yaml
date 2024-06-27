@@ -39,6 +39,7 @@ metadata:
   name: {{ .Values.movieService.name }}
   namespace: {{ .Values.namespace }}
 spec:
+  type: NodePort
   selector:
     app: {{ .Values.movieService.name }}
   ports:
