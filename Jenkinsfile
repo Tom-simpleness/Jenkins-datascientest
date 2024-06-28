@@ -83,7 +83,7 @@ pipeline {
         stage('Deploy to qa-env') {
             steps {
                 script {
-                    input message: 'Do you want to deploy to production?', ok: 'Deploy'
+                    
                     sh '''
                         
                         rm -Rf .kube
