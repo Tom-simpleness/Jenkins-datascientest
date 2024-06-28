@@ -82,6 +82,7 @@ appConfig:
 ingress:
   name: movie-cast-ingress
   class: nginx
+  host: dev.datascientest-landes.cloudns.ch
   paths:
     - path: /api/v1/movies
       pathType: Prefix
