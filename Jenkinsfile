@@ -117,10 +117,10 @@ pipeline {
                         # Check if the release exists
                         if helm status staging-env --namespace staging >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=staging
+                            helm upgrade --install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=staging --set ingress.host=staging.datascientest-landes.cloudns.ch
                         else
                             # Release does not exist, perform an installation
-                            helm install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=staging
+                            helm install staging-env ./microservices --namespace staging --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=staging --set ingress.host=staging.datascientest-landes.cloudns.ch
                         fi
                     '''
                 }
@@ -139,10 +139,10 @@ pipeline {
                         # Check if the release exists
                         if helm status production-env --namespace production >/dev/null 2>&1; then
                             # Release exists, perform an upgrade
-                            helm upgrade --install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=prod
+                            helm upgrade --install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=prod --set ingress.host=prod.datascientest-landes.cloudns.ch
                         else
                             # Release does not exist, perform an installation
-                            helm install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=prod 
+                            helm install production-env ./microservices --namespace prod --set castService.image.tag=${DOCKER_TAG},movieService.image.tag=${DOCKER_TAG} --set namespace=prod --set ingress.host=prod.datascientest-landes.cloudns.ch
                         fi
                     '''
                 }
