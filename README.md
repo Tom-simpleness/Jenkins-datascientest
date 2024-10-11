@@ -2,7 +2,7 @@
 
 ## Aperçu du Projet
 
-Ce projet, réalisé dans le cadre de l'examen Datascientest par LandesTom, met en place un pipeline de déploiement continu (CD) pour une application en microservices. L'objectif est de déployer automatiquement l'application dans plusieurs environnements de développement en utilisant Jenkins, Kubernetes, et Helm.
+Ce projet met en place un pipeline de déploiement continu (CD) pour une application en microservices. L'objectif est de déployer automatiquement l'application dans plusieurs environnements de développement en utilisant Jenkins, Kubernetes, et Helm.
 
 ## Structure du Projet
 
