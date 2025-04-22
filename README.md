@@ -1,73 +1,72 @@
-# Projet DevOps - Pipeline de Déploiement Multi-Environnements
+# DevOps Project - Multi-Environment Deployment Pipeline
 
-## Aperçu du Projet
+## Project Overview
 
-Ce projet met en place un pipeline de déploiement continu (CD) pour une application en microservices. L'objectif est de déployer automatiquement l'application dans plusieurs environnements de développement en utilisant Jenkins, Kubernetes, et Helm.
+This project sets up a continuous deployment (CD) pipeline for a microservices application. The goal is to automatically deploy the application across multiple development environments using Jenkins, Kubernetes, and Helm.
 
-## Structure du Projet
+## Project Structure
 
 ```
 .
-├── k8s/                  # Manifestes Kubernetes
-├── microservices/        # Code source des microservices
-│   └── helm/             # Charts Helm pour le déploiement
-├── Jenkinsfile           # Pipeline Jenkins
-└── README.md             # Ce fichier
+├── k8s/                  # Kubernetes manifests
+├── microservices/        # Microservices source code
+│   └── helm/             # Helm charts for deployment
+├── Jenkinsfile           # Jenkins pipeline
+└── README.md             # This file
 ```
 
-## Technologies Utilisées
+## Technologies Used
 
-- **Jenkins**: Orchestration du pipeline CI/CD
-- **Kubernetes**: Plateforme de container orchestration pour le déploiement
-- **Helm**: Gestionnaire de packages Kubernetes pour le déploiement des microservices
-- **Docker**: Conteneurisation des microservices
+- **Jenkins**: CI/CD pipeline orchestration
+- **Kubernetes**: Container orchestration platform for deployment
+- **Helm**: Kubernetes package manager for deploying microservices
+- **Docker**: Containerization of microservices
 
-## Fonctionnalités du Pipeline
+## Pipeline Features
 
-1. Build et test des microservices
-2. Création et push des images Docker
-3. Déploiement dans différents environnements (dev, staging, prod) via Helm
-4. Tests d'intégration post-déploiement
-5. Promotion entre environnements
+1. Build and test microservices
+2. Create and push Docker images
+3. Deploy to different environments (dev, staging, prod) via Helm
+4. Post-deployment integration tests
+5. Environment promotion
 
-## Prérequis
+## Prerequisites
 
-- Cluster Kubernetes opérationnel
-- Jenkins installé et configuré avec les plugins nécessaires
-- Helm installé sur le serveur Jenkins et les nœuds Kubernetes
-- Registre Docker accessible
+- Operational Kubernetes cluster
+- Jenkins installed and configured with required plugins
+- Helm installed on Jenkins server and Kubernetes nodes
+- Accessible Docker registry
 
-## Configuration et Utilisation
+## Setup and Usage
 
-1. Clonez ce dépôt sur votre serveur Jenkins.
-2. Configurez les credentials nécessaires dans Jenkins (Docker registry, Kubernetes, etc.).
-3. Créez un nouveau pipeline Jenkins pointant vers le `Jenkinsfile` de ce projet.
-4. Lancez le pipeline manuellement ou configurez des webhooks pour un déclenchement automatique.
+1. Clone this repository on your Jenkins server.
+2. Configure the required credentials in Jenkins (Docker registry, Kubernetes, etc.).
+3. Create a new Jenkins pipeline pointing to the `Jenkinsfile` in this project.
+4. Run the pipeline manually or configure webhooks for automatic triggers.
 
-## Déploiement
+## Deployment
 
-Le pipeline déploie automatiquement l'application dans les environnements suivants :
+The pipeline automatically deploys the application to the following environments:
 
-- Développement
+- Development
 - Staging
 - Production
 
-Chaque environnement est isolé dans son propre namespace Kubernetes.
+Each environment is isolated in its own Kubernetes namespace.
 
-## Monitoring et Logging
+## Monitoring and Logging
 
-- Utilisez les outils intégrés à Kubernetes pour le monitoring (ex: Prometheus, Grafana)
-- Les logs des applications sont centralisés via une stack ELK (Elasticsearch, Logstash, Kibana)
+- Use Kubernetes-integrated tools for monitoring (e.g., Prometheus, Grafana)
+- Application logs are centralized using the ELK stack (Elasticsearch, Logstash, Kibana)
 
-## Dépannage
+## Troubleshooting
 
-En cas de problème lors du déploiement :
+If deployment issues occur:
 
-1. Vérifiez les logs Jenkins pour des erreurs spécifiques
-2. Utilisez `kubectl` pour inspecter l'état des pods et services dans le cluster Kubernetes
-3. Vérifiez les logs des applications via `kubectl logs`
+1. Check Jenkins logs for specific errors
+2. Use `kubectl` to inspect the state of pods and services in the Kubernetes cluster
+3. View application logs using `kubectl logs`
 
+## License
 
-## Licence
-
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
